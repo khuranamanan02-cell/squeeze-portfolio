@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<style>
+@font-face{font-family:'Fr';src:url('fonts/Fraunces-400.ttf');font-weight:400}
+@font-face{font-family:'Fr';src:url('fonts/Fraunces-600.ttf');font-weight:600}
+@font-face{font-family:'Fr';src:url('fonts/Fraunces-700.ttf');font-weight:700}
+@font-face{font-family:'Fr';src:url('fonts/Fraunces-900.ttf');font-weight:900}
+@font-face{font-family:'In';src:url('fonts/Inter-400.ttf');font-weight:400}
+@font-face{font-family:'In';src:url('fonts/Inter-500.ttf');font-weight:500}
+@font-face{font-family:'In';src:url('fonts/Inter-600.ttf');font-weight:600}
+@font-face{font-family:'In';src:url('fonts/Inter-700.ttf');font-weight:700}
+@font-face{font-family:'In';src:url('fonts/Inter-800.ttf');font-weight:800}
+
+@page{size:A4;margin:0}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+ --cream:#FBF6EA; --green:#173F1B; --green2:#2C6B33; --orange:#EE6A1E;
+ --char:#231F1C; --mute:#7A7168; --line:#E3D9C6; --yellow:#FFC10E;
+}
+body{font-family:'In';color:var(--char);-weamy:0}
+.page{width:210mm;height:297mm;background:var(--cream);position:relative;overflow:hidden;page-break-after:always}
+.page:last-child{page-break-after:auto}
+
+/* ---------- shared ---------- */
+.pad{padding:0 17mm}
+.eyebrow{font-size:7.2pt;letter-spacing:.22em;text-transform:uppercase;font-weight:700;color:var(--orange)}
+.eyebrow.g{color:var(--green2)}
+h1,h2,h3{font-family:'Fr';font-weight:700;letter-spacing:-.015em;line-height:1.02}
+p{font-size:8.6pt;line-height:1.62;color:#4A423B}
+.rule{height:1px;background:var(--line)}
+
+/* topbar */
+.topbar{display:flex;align-items:center;justify-content:space-between;padding:11mm 17mm 0}
+.brandlock{display:flex;align-items:center;gap:3.2mm}
+.brandlock img{height:11mm}
+.wordmark{font-family:'Fr';font-weight:900;font-size:15pt;letter-spacing:.02em;color:var(--green);line-height:1}
+.wordmark span{display:block;font-family:'In';font-weight:600;font-size:5.1pt;letter-spacing:.2em;color:var(--orange);margin-top:1mm;white-space:nowrap}
+.topmeta{text-align:right;font-size:6.6pt;letter-spacing:.18em;text-transform:uppercase;color:var(--mute);font-weight:600;line-height:1.7}
+
+/* footer */
+.foot{position:absolute;bottom:0;left:0;right:0;padding:0 17mm 8mm;display:flex;justify-content:space-between;
+ font-size:6.4pt;letter-spacing:.18em;text-transform:uppercase;color:#A79C8E;font-weight:600}
+
+/* ---------- PAGE 1 ---------- */
+.hero{position:relative;margin-top:7mm}
+.blob{position:absolute;right:-40mm;top:2mm;width:136mm;height:136mm;border-radius:50%;
+ background:radial-gradient(circle at 40% 35%, #2C6B33 0%, #173F1B 72%)}
+.founderimg{position:absolute;right:4mm;top:2mm;height:140mm;z-index:2}
+.herotext{position:relative;z-index:3;width:100mm}
+h1.big{font-size:32pt;line-height:.98;color:var(--green);font-weight:900}
+h1.big em{font-style:normal;color:var(--orange)}
+.lede{margin-top:5.5mm;width:72mm;font-size:8.9pt;line-height:1.62}
+.sig{margin-top:7mm;padding-left:4mm;border-left:2.4pt solid var(--orange)}
+.sig .nm{font-family:'Fr';font-weight:700;font-size:11pt;color:var(--green);line-height:1.15}
+.sig .rl{font-size:6.8pt;letter-spacing:.2em;text-transform:uppercase;color:var(--mute);font-weight:700;margin-top:1.2mm}
+
+.founderbio{position:relative;z-index:4;margin-top:5mm;width:90mm;background:#fff;border:1px solid var(--line);
+ border-radius:4mm;padding:6mm 6.5mm;box-shadow:0 2mm 6mm rgba(35,31,28,.05)}
+.founderbio p{font-size:8.3pt}
+
+/* timeline */
+.tl{display:flex;margin-top:11mm;border-top:1px solid var(--line);padding-top:6mm}
+.tl .step{flex:1;padding-right:5mm;position:relative}
+.tl .dot{width:2.6mm;height:2.6mm;border-radius:50%;background:var(--orange);margin-bottom:3.4mm}
+.tl .step:nth-child(2) .dot{background:var(--green2)}
+.tl .step:nth-child(3) .dot{background:var(--yellow)}
+.tl .step:nth-child(4) .dot{background:var(--green)}
+.tl .yr{font-family:'Fr';font-weight:700;font-size:10.5pt;color:var(--green);line-height:1.1}
+.tl .tx{font-size:7.4pt;line-height:1.5;color:var(--mute);margin-top:1.6mm}
+
+/* mission */
+.mv{display:flex;gap:5mm;margin-top:10mm}
+.mv .card{flex:1;background:var(--green);color:#F3EEE2;border-radius:4mm;padding:7.5mm 7mm 8mm}
+.mv .card.alt{background:var(--orange);color:#FFF6EC}
+.mv h3{font-size:12pt;color:#fff;margin-bottom:2.6mm}
+.mv p{color:rgba(255,255,255,.86);font-size:8.1pt;line-height:1.6}
+
+/* ---------- PAGE 2 ---------- */
+.h2{font-size:24pt;color:var(--green);font-weight:900;line-height:1.0}
+.sub{margin-top:3.5mm;width:120mm}
+
+.menugrid{display:flex;flex-wrap:wrap;gap:4mm;margin-top:6mm}
+.mcard{width:56mm;background:#fff;border:1px solid var(--line);border-radius:3.5mm;padding:4.2mm 4.4mm 4.6mm}
+.mcard .ic{width:7.4mm;height:7.4mm;border-radius:2.2mm;background:#FDF0E2;display:flex;align-items:center;justify-content:center;margin-bottom:2.8mm}
+.mcard.g .ic{background:#E8F0E6}
+.mcard h4{font-family:'Fr';font-weight:700;font-size:9.4pt;color:var(--green);line-height:1.1}
+.mcard .it{font-size:6.9pt;color:var(--mute);line-height:1.5;margin-top:1.6mm}
+.mcard .pr{font-size:7.3pt;font-weight:700;color:var(--orange);margin-top:2.2mm;letter-spacing:.02em}
+
+/* day rhythm */
+.rhythm{margin-top:5mm;background:var(--green);border-radius:4mm;padding:4.6mm 6mm;display:flex;align-items:center;gap:6mm}
+.rhythm .lab{width:33mm;color:#fff}
+.rhythm .lab .e{font-size:6.6pt;letter-spacing:.2em;text-transform:uppercase;color:var(--yellow);font-weight:700}
+.rhythm .lab h3{font-size:13pt;color:#fff;margin-top:2mm;line-height:1.05}
+.rhythm .cols{flex:1;display:flex;gap:5mm}
+.rhythm .c{flex:1;border-left:1px solid rgba(255,255,255,.22);padding-left:4mm}
+.rhythm .c .t{font-size:6.6pt;letter-spacing:.16em;text-transform:uppercase;color:var(--yellow);font-weight:700}
+.rhythm .c .d{font-size:7.6pt;color:rgba(255,255,255,.9);line-height:1.5;margin-top:1.6mm}
+
+/* photos */
+.photorow{display:flex;gap:4mm;margin-top:5mm}
+.photorow .ph{border-radius:3.5mm;overflow:hidden;position:relative}
+.photorow .ph img{width:100%;height:100%;object-fit:cover;display:block}
+.cap{position:absolute;left:0;right:0;bottom:0;padding:2.4mm 4mm 2.6mm;
+ background:rgba(20,32,18,.82);
+ font-size:6.3pt;letter-spacing:.14em;text-transform:uppercase;color:#fff;font-weight:700}
+
+/* testimonials */
+.tgrid{display:flex;gap:4.5mm;margin-top:4.5mm}
+.tcard{flex:1;background:#fff;border:1px solid var(--line);border-radius:3.5mm;padding:4.6mm 5.2mm 5mm}
+.stars{color:var(--yellow);font-size:8pt;letter-spacing:.08em}
+.tcard .q{font-family:'Fr';font-weight:600;font-size:9pt;line-height:1.38;color:var(--green);margin-top:3mm}
+.tcard .a{font-size:6.5pt;letter-spacing:.14em;text-transform:uppercase;color:#A2988A;font-weight:700;margin-top:3.4mm}
+
+/* promise */
+.promise{margin-top:6mm;border:1.4pt solid var(--green);border-radius:4mm;padding:5.6mm 6.5mm;display:flex;gap:6mm;align-items:flex-start}
+.promise .pl{width:38mm}
+.promise .pl h3{font-size:13pt;color:var(--green)}
+.promise ul{flex:1;display:flex;flex-wrap:wrap;list-style:none;gap:1.6mm 4mm}
+.promise li{width:44mm;font-size:7.5pt;color:#4A423B;line-height:1.45;padding-left:4mm;position:relative}
+.promise li:before{content:"";position:absolute;left:0;top:1.5mm;width:1.8mm;height:1.8mm;border-radius:50%;background:var(--orange)}
+
+/* ---------- PAGE 3 ---------- */
+.stats{display:flex;gap:4mm;margin-top:6mm}
+.stat{flex:1;background:#fff;border:1px solid var(--line);border-radius:3.5mm;padding:4.4mm 4.2mm 4.8mm;text-align:left}
+.stat .n{font-family:'Fr';font-weight:900;font-size:19pt;color:var(--orange);line-height:1}
+.stat .l{font-size:6.7pt;letter-spacing:.13em;text-transform:uppercase;color:var(--mute);font-weight:700;margin-top:2.4mm;line-height:1.5}
+
+.cap4{display:flex;flex-wrap:wrap;gap:3.6mm;margin-top:5.5mm}
+.cbox{width:86.2mm;background:#fff;border:1px solid var(--line);border-radius:3.5mm;padding:4.2mm 4.6mm;display:flex;gap:3.6mm;align-items:flex-start}
+.cbox .ic{width:9mm;height:9mm;flex-shrink:0;border-radius:2.6mm;background:#173F1B;display:flex;align-items:center;justify-content:center}
+.cbox h4{font-family:'Fr';font-weight:700;font-size:9.6pt;color:var(--green);line-height:1.12}
+.cbox p{font-size:7.1pt;line-height:1.48;margin-top:1.4mm;color:var(--mute)}
+
+.compliance{margin-top:5.5mm;background:#F2EADA;border-radius:4mm;padding:5mm 6mm;display:flex;gap:7mm}
+.compliance .cl{width:40mm}
+.compliance .cl .e{font-size:6.6pt;letter-spacing:.2em;text-transform:uppercase;color:var(--orange);font-weight:700}
+.compliance .cl h3{font-size:12pt;color:var(--green);margin-top:2mm}
+.compliance .cr{flex:1;display:flex;flex-wrap:wrap;gap:2.4mm 4mm}
+.compliance .cr div{width:54mm;font-size:7.1pt;color:#4A423B;line-height:1.42}
+.compliance .cr b{color:var(--green)}
+
+.close{position:relative;margin:6mm 17mm 0;background:var(--green);border-radius:4.5mm;padding:7.5mm 8mm 7mm;color:#fff;overflow:hidden}
+.close h2{font-size:18pt;color:#fff;line-height:1.06;width:112mm;font-weight:900}
+.close .cc{display:flex;gap:9mm;margin-top:6mm;padding-top:5mm;border-top:1px solid rgba(255,255,255,.24)}
+.close .cc div{font-size:7.4pt;color:rgba(255,255,255,.88);line-height:1.6}
+.close .cc .k{font-size:6.4pt;letter-spacing:.2em;text-transform:uppercase;color:var(--yellow);font-weight:700;margin-bottom:1.4mm}
+.closemark{position:absolute;right:7mm;bottom:3mm;height:30mm;opacity:.95}
+</style>
+<title>Squeeze — Brand Portfolio | Campus Food Services</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Squeeze is a founder-run campus food brand serving fresh juices, smoothies, sandwiches and seasonal specials. Operating at ISB Mohali since January 2024.">
+<meta property="og:title" content="Squeeze — Brand Portfolio">
+<meta property="og:description" content="Fresh food. Real smiles. Every single day. A founder-run campus food brand, operating since January 2024.">
+<meta property="og:image" content="img/og.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href="img/mark.png">
+<style>
+html{background:#10160F}
+body{background:#10160F;display:block;padding:0 0 44px}
+.web-top{position:sticky;top:0;z-index:50;background:rgba(16,22,15,.94);
+ border-bottom:1px solid rgba(255,255,255,.1);display:flex;align-items:center;
+ justify-content:space-between;padding:13px 20px;font-family:'In'}
+.web-top .wl{display:flex;align-items:center;gap:10px}
+.web-top .wl img{height:30px}
+.web-top .wl b{font-family:'Fr';color:#fff;font-size:16px;font-weight:700;letter-spacing:.02em}
+.web-top .wl span{display:block;font-size:8px;font-weight:600;letter-spacing:.2em;color:#EE6A1E;margin-top:2px}
+.web-top a{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;
+ background:#EE6A1E;color:#fff;text-decoration:none;padding:10px 15px;border-radius:999px;white-space:nowrap}
+.sheets{display:flex;flex-direction:column;align-items:center;gap:22px;padding:26px 12px 0}
+.page{box-shadow:0 22px 60px rgba(0,0,0,.5);border-radius:8px;zoom:var(--z,1)}
+.web-foot{text-align:center;color:rgba(255,255,255,.42);font-family:'In';font-size:10px;
+ letter-spacing:.16em;text-transform:uppercase;padding:30px 20px 0;line-height:2}
+.web-foot a{color:#EE6A1E;text-decoration:none}
+@media print{
+ .web-top,.web-foot{display:none}
+ .sheets{padding:0;gap:0}
+ .page{box-shadow:none;border-radius:0;zoom:1}
+ html,body{background:#fff}
+}
+</style>
+</head>
+<body>
+<div class="web-top">
+  <div class="wl"><img src="img/mark.png"><b>SQUEEZE<span>BRAND PORTFOLIO</span></b></div>
+  <a href="Squeeze_Portfolio.pdf" download>Download PDF</a>
+</div>
+<div class="sheets">
+
+<!-- ================= PAGE 1 ================= -->
+<div class="page">
+  <div class="topbar">
+    <div class="brandlock">
+      <img src="img/mark.png">
+      <div class="wordmark">SQUEEZE<span>FRESH · FAST · EVERY DAY</span></div>
+    </div>
+    <div class="topmeta">Brand Portfolio<br>Campus Food Services</div>
+  </div>
+
+  <div class="pad">
+    <div class="hero">
+      <div class="blob"></div>
+      <img class="founderimg" src="img/founder.png">
+      <div class="herotext">
+        <div class="eyebrow">Est. January 2024 · Mohali</div>
+        <h1 class="big" style="margin-top:5mm">Fresh food.<br>Real smiles.<br><em>Every single<br>day.</em></h1>
+        <p class="lede">Squeeze is a founder-run campus food brand built on a simple idea — students deserve food that is fresh, fast, fairly priced and served by people who actually care.</p>
+        <div class="sig">
+          <div class="nm">Vikrant</div>
+          <div class="rl">Founder · Squeeze</div>
+        </div>
+      </div>
+
+      <div class="founderbio">
+        <div class="eyebrow g">The Founder</div>
+        <p style="margin-top:3mm">Vikrant brings years of professional F&amp;B and catering experience to Squeeze. He is a known name in Mohali's catering circuit and has served large-format crowds at the PCA Stadium, Mohali, during IPL and international cricket fixtures.</p>
+        <p style="margin-top:2.4mm">That operational discipline now sits behind a small campus counter — where he personally oversees quality, hygiene and consistency, every single day.</p>
+      </div>
+    </div>
+
+    <div class="tl">
+      <div class="step"><div class="dot"></div><div class="yr">January 2024</div><div class="tx">Squeeze opens its first counter with a fresh-juice-led menu.</div></div>
+      <div class="step"><div class="dot"></div><div class="yr">ISB Mohali</div><div class="tx">Serving a campus community of roughly 700 students and staff.</div></div>
+      <div class="step"><div class="dot"></div><div class="yr">100–200 daily</div><div class="tx">Students and staff served every day, plus campus event catering.</div></div>
+      <div class="step" style="padding-right:0"><div class="dot"></div><div class="yr">Next campus</div><div class="tx">Ready to bring the same standard to a new university partner.</div></div>
+    </div>
+
+    <div class="mv">
+      <div class="card">
+        <h3>Our Mission</h3>
+        <p>To make fresh, honest food the easiest choice on campus — priced so that any student can eat well, served fast enough to fit between classes.</p>
+      </div>
+      <div class="card alt">
+        <h3>Our Vision</h3>
+        <p>To become the food counter students genuinely look forward to — on every campus we operate, run with the same founder-level care as our first.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="foot"><span>Squeeze · Founded 2024</span><span>Page 01 — Who we are</span></div>
+</div>
+
+<!-- ================= PAGE 2 ================= -->
+<div class="page">
+  <div class="topbar">
+    <div class="brandlock">
+      <img src="img/mark.png">
+      <div class="wordmark">SQUEEZE<span>FRESH · FAST · EVERY DAY</span></div>
+    </div>
+    <div class="topmeta">02<br>The Experience</div>
+  </div>
+
+  <div class="pad" style="margin-top:9mm">
+    <div class="eyebrow">What we serve</div>
+    <h2 class="h2" style="margin-top:4mm">Why students<br>keep coming back.</h2>
+    <p class="sub">A menu built around freshness and speed — cold-pressed juices and smoothies, hot sandwiches, and a seasonal range that changes with the weather. Over 35 items across the year.</p>
+
+    <div class="menugrid">
+      <div class="mcard">
+        <div class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EE6A1E" stroke-width="2" stroke-linecap="round"><path d="M6 3h12l-1 5H7z"/><path d="M8 8v11a2 2 0 002 2h4a2 2 0 002-2V8"/></svg></div>
+        <h4>Fresh Fruit Juices</h4>
+        <div class="it">Watermelon · Mosambi · Orange · Pineapple · ABC · Carrot · Mix</div>
+        <div class="pr">₹50 – ₹100</div>
+      </div>
+      <div class="mcard g">
+        <div class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2C6B33" stroke-width="2" stroke-linecap="round"><path d="M7 21h10"/><path d="M12 21v-6"/><path d="M5 4h14l-2 8H7z"/><path d="M9 4V2"/></svg></div>
+        <h4>Smoothies</h4>
+        <div class="it">Exotica · Sunshine · Blueberry</div>
+        <div class="pr">₹180</div>
+      </div>
+      <div class="mcard">
+        <div class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EE6A1E" stroke-width="2" stroke-linecap="round"><rect x="7" y="7" width="10" height="14" rx="2"/><path d="M15 7V3l3 1"/></svg></div>
+        <h4>Milkshakes &amp; Coffee</h4>
+        <div class="it">Banana · Mango · Chocolate · Oreo · KitKat · Cold Coffee</div>
+        <div class="pr">₹60 – ₹100</div>
+      </div>
+      <div class="mcard g">
+        <div class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2C6B33" stroke-width="2" stroke-linecap="round"><path d="M3 11h18"/><path d="M5 11a7 7 0 0114 0"/><path d="M4 15h16"/><path d="M6 19h12"/></svg></div>
+        <h4>Fruit Bowls</h4>
+        <div class="it">Seven seasonal fruits, cut fresh to order</div>
+        <div class="pr">₹90</div>
+      </div>
+      <div class="mcard">
+        <div class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#EE6A1E" stroke-width="2" stroke-linejoin="round"><path d="M3 8l9-4 9 4-9 4z"/><path d="M3 13l9 4 9-4"/></svg></div>
+        <h4>Sandwiches &amp; Toast</h4>
+        <div class="it">Veg · Paneer · PBJ · Avocado Toast</div>
+        <div class="pr">₹80 – ₹120</div>
+      </div>
+      <div class="mcard g">
+        <div class="ic"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#2C6B33" stroke-width="2" stroke-linecap="round"><path d="M12 2v6"/><path d="M8 8h8l-1.5 12h-5z"/><circle cx="12" cy="14" r="1.6"/></svg></div>
+        <h4>Mocktails</h4>
+        <div class="it">Berlin · Blueberry · Pina Colada · Juice Punch · Watermelon Blossom</div>
+        <div class="pr">₹120</div>
+      </div>
+    </div>
+
+    <div class="rhythm">
+      <div class="lab">
+        <div class="e">All-day service</div>
+        <h3>One counter.<br>Three shifts.</h3>
+      </div>
+      <div class="cols">
+        <div class="c"><div class="t">Morning</div><div class="d">Cold-pressed juices, fruit bowls and coffee before class.</div></div>
+        <div class="c"><div class="t">Afternoon</div><div class="d">Hot sandwiches, toasts, shakes and smoothies between sessions.</div></div>
+        <div class="c"><div class="t">Evening</div><div class="d">Seasonal specials — momos, thukpa, hot chocolate and dry fruit chaat.</div></div>
+      </div>
+    </div>
+
+    <div class="photorow">
+      <div class="ph" style="width:59mm;height:35mm"><img src="img/counter.jpg"><div class="cap">Daily service counter</div></div>
+      <div class="ph" style="width:50mm;height:35mm"><img src="img/stall.jpg"><div class="cap">Campus event catering</div></div>
+      <div class="ph" style="width:59mm;height:35mm"><img src="img/storefront.jpg"><div class="cap">Our outlet, ISB Mohali</div></div>
+    </div>
+
+    <div class="eyebrow" style="margin-top:5.5mm">What students say</div>
+    <div class="tgrid">
+      <div class="tcard"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="q">&ldquo;The shakes are what got me hooked. A cold coffee before a 9am class became a daily ritual &mdash; and it tastes the same every single time.&rdquo;</div><div class="a">Manan &middot; Student, ISB Mohali</div></div>
+      <div class="tcard"><div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div><div class="q">&ldquo;The evening chicken momos are the best thing on campus. Always hot, always fresh, and never a long wait.&rdquo;</div><div class="a">Shrishti &middot; Student, ISB Mohali</div></div>
+    </div>
+  </div>
+
+  <div class="foot"><span>Squeeze · Founded 2024</span><span>Page 02 — Why students love us</span></div>
+</div>
+
+<!-- ================= PAGE 3 ================= -->
+<div class="page">
+  <div class="topbar">
+    <div class="brandlock">
+      <img src="img/mark.png">
+      <div class="wordmark">SQUEEZE<span>FRESH · FAST · EVERY DAY</span></div>
+    </div>
+    <div class="topmeta">03<br>The Partnership</div>
+  </div>
+
+  <div class="pad" style="margin-top:9mm">
+    <div class="eyebrow">The case for Squeeze</div>
+    <h2 class="h2" style="margin-top:4mm">A partner, not<br>just a vendor.</h2>
+
+    <div class="stats">
+      <div class="stat"><div class="n">2024</div><div class="l">Operating<br>since January</div></div>
+      <div class="stat"><div class="n">700</div><div class="l">Campus community<br>served</div></div>
+      <div class="stat"><div class="n">100&ndash;200</div><div class="l">People served<br>every day</div></div>
+      <div class="stat"><div class="n">35+</div><div class="l">Menu items<br>across the year</div></div>
+    </div>
+
+    <div class="cap4">
+      <div class="cbox">
+        <div class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFC10E" stroke-width="2" stroke-linecap="round"><path d="M12 3l8 4v6c0 4.5-3.2 7.5-8 8.5-4.8-1-8-4-8-8.5V7z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <div><h4>Proven on campus</h4><p>Two years of continuous daily operation inside a live university environment, through term time, exams and event peaks.</p></div>
+      </div>
+      <div class="cbox">
+        <div class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFC10E" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></div>
+        <div><h4>Built for speed</h4><p>A tight menu and a trained three-person team designed around short breaks and long queues. Delivery to hostel blocks available.</p></div>
+      </div>
+      <div class="cbox">
+        <div class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFC10E" stroke-width="2" stroke-linecap="round"><path d="M12 21s7-4.5 7-10a7 7 0 10-14 0c0 5.5 7 10 7 10z"/><circle cx="12" cy="11" r="2.4"/></svg></div>
+        <div><h4>Founder-led, on site</h4><p>Vikrant is personally present in the operation. Escalations reach the owner directly — not a regional manager in another city.</p></div>
+      </div>
+      <div class="cbox">
+        <div class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFC10E" stroke-width="2" stroke-linecap="round"><path d="M4 20V10l8-6 8 6v10"/><path d="M9 20v-6h6v6"/></svg></div>
+        <div><h4>Large-format capability</h4><p>Catering experience at PCA Stadium, Mohali, for IPL and international fixtures — volume operations are familiar territory.</p></div>
+      </div>
+      <div class="cbox">
+        <div class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFC10E" stroke-width="2" stroke-linecap="round"><path d="M3 12h4l2 6 4-14 2 8h6"/></svg></div>
+        <div><h4>Student pricing</h4><p>Core items from ₹50. Pricing is set for daily affordability, not occasional treats — and held steady through the term.</p></div>
+      </div>
+      <div class="cbox">
+        <div class="ic"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FFC10E" stroke-width="2" stroke-linecap="round"><path d="M12 3v18"/><path d="M5 8c3 0 5 1.5 7 4"/><path d="M19 8c-3 0-5 1.5-7 4"/></svg></div>
+        <div><h4>Fresh, not frozen</h4><p>Fruit cut to order, juices pressed on request, seasonal menus that rotate with availability rather than sitting in cold storage.</p></div>
+      </div>
+    </div>
+
+    <div class="compliance">
+      <div class="cl">
+        <div class="e">Our Promise</div>
+        <h3>Standards we hold ourselves to.</h3>
+      </div>
+      <div class="cr">
+        <div><b>FSSAI licensed</b> — operating under a valid food safety licence</div>
+        <div><b>Daily hygiene</b> — counter, equipment and storage cleaned to schedule</div>
+        <div><b>Staff health</b> — trained team, medical checks maintained</div>
+        <div><b>Quality checks</b> — founder-verified stock and prep, every day</div>
+        <div><b>Waste discipline</b> — same-day fruit prep, no carry-over</div>
+        <div><b>Open feedback</b> — issues acknowledged and fixed within 24 hours</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="close">
+    <h2>Let's build a better campus dining experience together.</h2>
+    <div class="cc">
+      <div><div class="k">Founder</div>Vikrant<br>Squeeze</div>
+      <div><div class="k">Phone</div>+91 76968 21682</div>
+      <div><div class="k">Current outlet</div>ISB Campus, Mohali<br>Punjab, India</div>
+    </div>
+    <img class="closemark" src="img/mark.png">
+  </div>
+
+  <div class="foot"><span>Squeeze · Founded 2024</span><span>Page 03 — Why choose us</span></div>
+</div>
+
+</div>
+<div class="web-foot">
+  Squeeze &middot; Founded January 2024 &middot; ISB Campus, Mohali<br>
+  Vikrant, Founder &middot; <a href="tel:+917696821682">+91 76968 21682</a>
+</div>
+<script>
+(function(){
+  function fit(){
+    var z = Math.min(1, (window.innerWidth - 24) / 794);
+    document.documentElement.style.setProperty('--z', z);
+  }
+  fit(); window.addEventListener('resize', fit);
+})();
+</script>
+</body></html>
